@@ -1,0 +1,1 @@
+float mysquare(float value);

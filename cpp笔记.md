@@ -30,11 +30,11 @@
   >
   >避免默认名称冲突，其后必须紧跟输出文件名
 
-![image-20250807184945244](.\images\image-20250807184945244.png)
+<img src=".\images\image-20250807184945244.png" alt="image-20250807184945244" style="zoom: 67%;" />
 
 - VSCode添加编译器
 
-  > 终端选择` WSL` 而不是 `PowerShell`，主要是想练习最近学习的 `Linux` 命令
+  > 终端使用 ` WSL:Ubuntu-20.4` 而不是 `PowerShell`，主要是想练习最近学习的 `Linux` 命令
 
   > 首先在 `VSCode` 中安装扩展 `WSL` ，使之完全运行在  `WSL` 独立的 `Linux` 环境中
   >
@@ -112,15 +112,15 @@
 - 预处理器处理预处理指令，例如define、include等，编译器不处理该指令
 - 宏由define定义，将文本进行替换，编译器读到该文本时则替换为对应内容
 
-![image-20250807201841260](.\images\image-20250807201841260.png)
+<img src=".\images\image-20250807201841260.png" alt="image-20250807201841260" style="zoom:50%;" />
 
-![image-20250807201916788](E:\Typora\Typora\coding-study\image-20250807201916788.png)
+<img src="E:\Typora\Typora\coding-study\image-20250807201916788.png" alt="image-20250807201916788" style="zoom:50%;" />
 
 
 
 ## 1.5 命令行输入
 
-- 完整的main函数有两个参数，通过命令行输入参数
+- 完整的 `main` 函数有两个参数，通过命令行输入参数
 
   > `argc`：命令行输入的参数个数，是一个整数
   >
@@ -198,7 +198,7 @@
   >
   > 当数值量很大时，`int1->float->int2`，转换结果 `int1≠int2`
 
-  ![image-20250808135528017](.\images\image-20250808135528017.png)
+  <img src=".\images\image-20250808135528017.png" alt="image-20250808135528017" style="zoom: 67%;" />
 
 - 除法运算
 
@@ -206,6 +206,40 @@
   >
   > 两个整数相除，其中任何一个整数后带符号 `f` 声明为浮点类型，结果就会保留小数部分
 
-  ![image-20250808135045632](.\images\image-20250808135045632.png)
+  <img src=".\images\image-20250808135045632.png" alt="image-20250808135045632" style="zoom: 67%;" />
 
-# 3 条件循环
+# 3 分支循环
+
+## 1.1 条件语句
+
+- 条件
+
+  > **条件** 就是 **可以转换为bool型的表达式**，如果不是bool会先转换为 `bool`，例如（-2）就是 `True` 值
+  >
+  > 关系表达式：用关系运算符（等于、大于、小于...）比大小的结果：`True/False`
+  >
+  > 逻辑表达式：用逻辑运算符（取反 `！`、与 `&&`、或 `||`）算出的结果：`True/Flase`
+
+<img src="D:\GitHub\cpp\images\image-20250809110918338.png" alt="image-20250809112944503" style="zoom: 33%;" />
+
+
+
+## 1.2 循环语句
+
+- `while` 循环
+- `for` 循环
+
+- 退出循环
+
+  >`break`：退出当前循环，并终止循环
+  >
+  >`continue`：退出当前循环，进入下一次循环
+
+- `goto` 跳转
+
+  > 跳到 `goto` 所指向的位置执行，一般用作 `EXIT_ERROR`
+
+- `switch-case` 语句
+
+  > `case <xxx>` 并不是 `if` 条件判断，而是`label` 标签
+
