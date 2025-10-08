@@ -1,6 +1,6 @@
 # 1 简要介绍
 
-> 课程来源：[快速学习C和C++——南方科技大学于仕琪副教授](https://www.bilibili.com/video/BV1Vf4y1P7pq/?spm_id_from=333.788.videopod.episodes&vd_source=dd2b7c41f54e83182372ee62c303b855)
+> 课程来源：[C/C++基础语法与优化策略——南方科技大学于仕琪副教授](https://www.bilibili.com/video/BV1Vf4y1P7pq/?spm_id_from=333.788.videopod.episodes&vd_source=dd2b7c41f54e83182372ee62c303b855)
 
 > 本课重点：
 >
@@ -48,7 +48,7 @@
   >
   > 版本分别为 `g++ (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0` 和 `GNU Make 4.2.1 Built for x86_64-pc-linux-gnu`
 
-  > 终端字太小了，使用 `Ctrl+,` 打开设置，使用 `terminal integrated: font size` 调整大小为合适值
+  > 终端字太小了，使用 `Ctrl+`， 打开设置，使用 `terminal integrated: font size` 调整大小为合适值
 
 - 第一次编译
 
@@ -150,7 +150,7 @@
   >
   >`unsigned int`：无符号类型，32位数值位
 
-- `sizeof` 操作符查看变量长度
+- **`sizeof` 操作符查看变量长度**
 
   >`sizeof` 是一个操作符，而不是函数
   >
@@ -303,6 +303,16 @@
 
   > `strcpy`：复制字符串
   >
+  > > `strncpy`：将一个字符串的前 n 个字符复制到另一个字符串中。
+  > >
+  > > 当源字符串的长度小于 n 时，目标字符串的剩余部分将用空字节填充。由于 **strncpy** 不会自动添加空字符，使用时应确保目标字符串足够大，以容纳 n 个字符和一个额外的空字符。这可以通过将 n 设置为目标数组大小减一，并在数组最后一个元素设置为空字符来实现。
+  > >
+  > > 这样可以确保即使源字符串长度超过目标数组大小，也**不会导致缓冲区溢出**，同时保证了字符串正确结束。
+  > >
+  > > `strncpy(dest, src, sizeof(dest) - 1);`
+  > >
+  > > ``dest[sizeof(dest) - 1] = '\0'`
+  >
   > `strcat`：连接字符串
   >
   > `strcmp`：比较大小，第一个字符的编码值大小，True输出正值，False输出负值
@@ -348,3 +358,99 @@
   >默认从0开始递增，也可以手动指定枚举值
 
 <img src="E:\Typora\Typora\coding-study\image-20250810194918409.png" alt="image-20250810194918409" style="zoom: 67%;" />
+
+## 4.4 Typedef
+
+- Typedef
+
+  > 是一个关键词，用来创建**某种数据类型的别名**
+  >
+  > 例如：Typedef unsigned char uchar // 给unsigned char类型起了一个别名uchar，**两者完全等价**
+
+- 应用于**头文件**
+
+  ```c++
+  _uint8_t.h
+  #ifndef _UINT8_T
+  #define _UINT8_T
+  typedef unsigned char uint8_t; //创建了8位整数类型的一个别名
+  #endif
+  ```
+
+- 应用于**宏定义**（为应用在当不同系统中统一变量长度，跨平台兼容）
+
+  ```c++
+  #if defined(_LP64)	// 检查某个宏是否被定义，如果在64位系统下，定义wchar_t是4字节数据类型
+  typedef int wchar_t;	
+  #else	// 其他系统下（32位系统中long是4字节）
+  typedef long wchar_t;
+  #endif
+  ```
+
+# 5 指针
+
+## 5.1 指针类型
+
+- 指针
+
+  > 指针声明：`<数据类型> * <变量名>`
+  >
+  > 指针内容：指针存的是一个地址
+  >
+  > `&` ：放在变量前，取变量的地址
+  >
+  > `*`：放在地址前（指针前），取地址中的内容
+
+<img src=".\images\image-20250811104451044.png" alt="image-20250811104451044" style="zoom: 33%;" />
+
+- 结构体的指针
+
+  ```c++
+  struct Student
+  {
+      char name[4];
+      int born;
+      bool male;
+  };
+  
+  Student stu = ("Yu", 2002, true);
+  Student *pStu = &stu;	// 将结构体变量的地址赋值给指针变量
+  
+  // 通过指针修改结构体的方式
+  strncpy(pStu->name, "Li", sizeof(pStu->name)); 
+  (*pStu).born = 2000;
+  pStu->male = false;
+  ```
+
+- 输出指针的信息
+
+  ```c++
+  Student stu = {"Yu", 2000, true};
+  Student *pStu = &stu; 
+  cout << "sizeof(pStu) = " << sizeof(pStu) << endl;	// 输出指针的长度
+  cout << "Address of stu" << pStu << endl;	// 输出指针所指向的地址
+  ```
+
+- 指针的指针
+
+  ![image-20251008183538403](E:\Typora\Typora\coding-study\image-20251008183538403-1759921489119.png)
+
+  ```c++
+  int num = 10;	
+  int *p = &num;	// 指针
+  int **pp = &p;	// 指针的指针
+  
+  *(*pp) = 20;	// 取两次值是num的值	
+  ```
+
+- 常量指针
+
+  ![image-20251008191305398](D:\GitHub\cpp\images\image-20251008191305398.png)
+
+## 5.2 指针与数组
+
+
+
+
+
+## 5.3 分配内存
