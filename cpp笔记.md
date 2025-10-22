@@ -365,11 +365,37 @@
 
 ## 4.4 Typedef
 
-- Typedef
+- Typedef（**关键词**）
 
-  > 是一个关键词，用来创建**某种数据类型的别名**
-  >
-  > 例如：Typedef unsigned char uchar // 给unsigned char类型起了一个别名uchar，**两者完全等价**
+- 应用于**数据类型的别名**
+
+  ```c++
+  Typedef unsigned int uint // 给unsigned int数据类型起了一个别名uint
+  ```
+
+- 应用于**用户自定义数据类型**
+
+  ```c++
+  // 用户自定义一个新的数据类型
+  // 然后直接用这个新的数据类型来直接定义结构变量
+  typedef struct Books
+  {
+      char title[50];
+      char author[50];
+      int book_id;
+  };
+  
+  int main()
+  {
+      Book book;
+      
+      strcpy(book.title, "C语言教程");
+     	strcpy(book.author, "Anne"); 
+     	book.book_id = 12345;
+      
+      return 0;
+  }
+  ```
 
 - 应用于**头文件**
 
@@ -390,6 +416,11 @@
   typedef long wchar_t;
   #endif
   ```
+
+- typedef VS #define
+
+  > - **typedef** 仅限于为类型定义符号名称，**#define** 不仅可以为类型定义别名，也能为数值定义别名，比如您可以定义 1 为 ONE。
+  > - **typedef** 是由编译器执行解释的，**#define** 语句是由预编译器进行处理的
 
 ---
 
@@ -628,9 +659,22 @@
 ## 6.1 函数的参数
 
 - 传参的两种方式
-  - **pass by value（通常使用）**
-  - pass by reference
+  - **pass by value**（值传递）
+
+    >1. 基本数据类型（int/float/struct）：**数据拷贝**。在函数中修改变量的值，不会改变函数外变量的值
+    >
+    >2. 指针（* p）：**地址拷贝**。在函数内修改指针指向的地址，不会改变函数外的指针所指向的地址。但在函数中通过指针修改变量的值，会使函数外的变量的值也改变
+    >
+    >   **当参数较大时，拷贝数据会消耗较大内存空间，效率不高**
+
+  - **pass by reference**（引用传递）
+
+    > 变量的别名：int  **&**num_ref = num，其中num_ref是num的别名，修改num_ref即修改num
+    >
+    > **当传参使用&引用时，没有数据拷贝，效率很高**
+    >
+    > **但要注意避免直接修改原变量，可以使用const来限制参数**
 
 
 
-## 6.2
+## 6.2 函数的返回
